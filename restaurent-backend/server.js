@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({ origin:"*" }));
 app.use(express.json());
 
 mongoose
@@ -13,6 +13,9 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
 
+app.get('/',(req, res) => {
+  res.send("Hello");
+}) 
 app.use("/api/items", require("./routes/items"));
 app.use("/api/orders", require("./routes/orders"));
 
